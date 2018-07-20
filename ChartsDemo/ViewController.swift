@@ -11,13 +11,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var slicesNum = 7
+    
     @IBOutlet weak var pieView: Chart! {
         didSet {
             pieView.delegate = self
         }
     }
     
-
+    @IBAction func hgh() {
+        slicesNum = 5 + (arc4random_uniform(2) == 1 ? -1 : 1)
+        pieView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +46,7 @@ extension ViewController: ChartDelegate {
     
 
     func numberOfSlices(forChart chart: Chart) -> Int {
-        return 5
+        return slicesNum
     }
 
     func sliceArea(fromChart chart: Chart, atIndex index: Int) -> ChartSlice {

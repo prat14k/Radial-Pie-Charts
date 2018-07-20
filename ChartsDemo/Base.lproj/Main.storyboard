@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eEk-27-EEQ">
     <device id="ipad10_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdi-Jr-mJb" customClass="Chart" customModule="ChartsDemo" customModuleProvider="target">
-                                <rect key="frame" x="199.5" y="70" width="714" height="714"/>
+                                <rect key="frame" x="221.5" y="114" width="670" height="670"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hdi-Jr-mJb" secondAttribute="height" multiplier="1:1" id="OI7-wq-jbP"/>
@@ -35,13 +35,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="30M-fu-gFA">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="hcc-Jl-Eyv">
+                            <connections>
+                                <action selector="hgh" destination="BYZ-38-t0r" id="dvh-gY-EkE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="pieView" destination="Hdi-Jr-mJb" id="g5Q-Ja-1WG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56" y="220"/>
+            <point key="canvasLocation" x="769.96402877697847" y="219.42446043165469"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="779-So-Hab">
@@ -69,6 +76,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r2q-GX-S3e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="127" y="896"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="In1-RS-I2V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="eEk-27-EEQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hQ8-sX-CRu">
+                        <rect key="frame" x="0.0" y="20" width="1112" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Izk-dB-RXe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jba-Nf-gdz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="55.575539568345327" y="219.42446043165469"/>
         </scene>
     </scenes>
 </document>

@@ -21,6 +21,8 @@ protocol ChartDelegate: class {
 
 class Chart: UIControl {
     
+    static let imageSize: CGFloat = 35
+    
     weak var delegate: ChartDelegate?
     
     private var slicesCount: Int = 0
@@ -85,6 +87,8 @@ class Chart: UIControl {
     }
     
     func reloadData() {
+        subviews.forEach { $0.removeFromSuperview() }
+        
         fetchChartCircles()
         fetchChartSlices()
         
@@ -97,18 +101,55 @@ class Chart: UIControl {
     private func getNumberLabel(text: String, color: UIColor) -> UILabel {
         let lbl = UILabel()
         lbl.text = text
-        lbl.font = UIFont.systemFont(ofSize: 11)
+        lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.sizeToFit()
         lbl.textColor = color
         return lbl
     }
     
-    private func drawChart() {
-        drawCircles()
+    
+    func drawLinesAndImages() {
+        let center = CGPoint(x: bounds.width/2, y: bounds.height/2)
+        guard slices.count > 0  else { return }
+        
+        let dividerLine = UIBezierPath()
+    
+        for index in 0..<slices.count {
+            let deltaAngle = (2 * CGFloat.pi) / CGFloat(slices.count)
+            
+            let angle = CGFloat(index) * deltaAngle + ((2 * CGFloat.pi) * (3 / 4))
+            
+            dividerLine.move(to: center)
+            
+            var nextPoint = CGPoint.zero
+            nextPoint.x = center.x + maximumRadius * cos(angle)
+            nextPoint.y = center.y + maximumRadius * sin(angle)
+            
+            dividerLine.addLine(to: nextPoint)
+            
+            let imageView = getImageView()
+            let imageCenter = CGPoint(x: center.x + (maximumRadius + 25) * cos(angle), y: center.x + (maximumRadius + 25) * sin(angle))
+            imageView.center = imageCenter
+            addSubview(imageView)
+            
+            imageView.transform = CGAffineTransform(rotationAngle: angle)
+        }
+        
+        dividerLine.lineWidth = 1  // ###  Do better
+        UIColor.white.setStroke()
+        dividerLine.stroke()
     }
     
+    
+    func getImageView() -> UIImageView {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Chart.imageSize, height: Chart.imageSize))
+        imageView.image = #imageLiteral(resourceName: "diamond")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }
+    
+    
     private func drawCircles() {
-        
         let center = CGPoint(x: bounds.width/2, y: bounds.height/2)
         
         let concentricCirclesGap = maximumRadius / CGFloat(chartCircles.count)
@@ -194,9 +235,9 @@ class Chart: UIControl {
         
         let centreAngle = ((startAngle + endAngle) / 2).truncatingRemainder(dividingBy: CGFloat.pi * 2)
         var direction: Bool = true
-        if centreAngle >= (CGFloat.pi / 4) && centreAngle <= (CGFloat.pi * 3 / 4) { direction = false }
+        if centreAngle >= 0 && centreAngle <= CGFloat.pi { direction = false }
         
-        centreArcPerpendicular(text: chartSlice.title, context: context, radius: maximumRadius + 15, angle: -(startAngle + endAngle) / 2, colour: UIColor.white, font: UIFont.systemFont(ofSize: 15), clockwise: direction)
+        centreArcPerpendicular(text: chartSlice.title, context: context, radius: maximumRadius + 15, angle: -(startAngle + endAngle) / 2, colour: UIColor.white, font: UIFont.systemFont(ofSize: 17), clockwise: direction)
         
         context.restoreGState()
     }
@@ -206,8 +247,10 @@ class Chart: UIControl {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         print("Draw REct Called")
-        drawChart()
+        
+        drawCircles()
         drawSlices()
+        drawLinesAndImages()
     }
     
 }
