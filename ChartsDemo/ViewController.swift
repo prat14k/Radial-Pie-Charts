@@ -46,24 +46,16 @@ extension ViewController: ChartDelegate {
 
     func sliceArea(fromChart chart: Chart, atIndex index: Int) -> ChartSlice {
         let v: CGFloat = 0.4 + (index % 2 == 0 ? 0.3 : 0.1) + (index == 4 ? 0.2 : 0)
-        var slice = ChartSlice(radiusMultiplier: v)
+        var slice = ChartSlice(title: "Hydration \(index)",radiusMultiplier: v)
         slice.fillColor = UIColor.yellow.withAlphaComponent(0.3)
         slice.lineColor = UIColor.orange
         
         return slice
     }
 
-//    func area(forChart chart: Chart) -> ChartArea {
-//        let area = ChartArea()
-//        area.scaleLinesCount = 5
-//        area.lineColor = UIColor.gray
-//        area.lineWidth = 1
-//        area.selectedLineWidth = 4
-//        return area
-//    }
 
     func maximumRadiusValue(forChart chart: Chart) -> CGFloat {
-        return pieView.bounds.width/2 - 10
+        return pieView.bounds.width/2 - 50
     }
 
 }

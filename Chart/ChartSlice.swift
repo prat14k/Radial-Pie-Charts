@@ -14,10 +14,11 @@ struct ChartSlice {
     var fillColor: UIColor = UIColor.clear
     var lineColor: UIColor = UIColor.black
     var lineWidth: CGFloat = 1
+    var title: String
     
-    
-    init(radiusMultiplier: CGFloat, lineColor: UIColor = UIColor.black, lineWidth: CGFloat = 1, fillColor: UIColor = UIColor.clear) {
+    init(title: String, radiusMultiplier: CGFloat, lineColor: UIColor = UIColor.black, lineWidth: CGFloat = 1, fillColor: UIColor = UIColor.clear) {
         
+        self.title = title
         self.radiusMultiplier = radiusMultiplier
         self.lineColor = lineColor
         self.lineWidth = lineWidth
