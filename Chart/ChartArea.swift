@@ -11,9 +11,9 @@ import UIKit
 
 class ChartArea {
     
-    var scaleLinesCount: CGFloat = 1
-    var lineWidth: CGFloat = 1
-    var lineColor: UIColor = UIColor.darkGray
-    var selectedLineWidth: CGFloat = 4
+//    var scaleLinesCount: CGFloat = 1
+//    var lineWidth: CGFloat = 1
+//    var lineColor: UIColor = UIColor.darkGray
+//    var selectedLineWidth: CGFloat = 4
     
 }

@@ -9,12 +9,34 @@
 import UIKit
 
 
+struct LineDash {
+    var length: CGFloat
+    var gap: CGFloat
+}
+
 
 struct ChartCircle {
+
+
     let title: String
-    let strokeStyle: CGLineCap
-    let width: CGFloat
-    let color: UIColor
+    let titleColor: UIColor
+    var lineDash: LineDash?
+    
+    let lineWidth: CGFloat
+    let lineColor: UIColor
+    let fillColor: UIColor
+    
+    
+    
+    
+    init(title: String, titleColor: UIColor = UIColor.black, lineWidth: CGFloat = 1, lineColor: UIColor = UIColor.black, fillColor: UIColor = UIColor.clear) {
+        self.title = title
+        self.titleColor = titleColor
+        self.lineWidth = lineWidth
+        self.lineColor = lineColor
+        self.fillColor = fillColor
+    }
+    
 }
 
 

@@ -9,8 +9,19 @@
 import UIKit
 
 
-class ChartSlice {
-    var value: CGFloat!
-    var fillColor: UIColor?
-    var strokeColor: UIColor?
+struct ChartSlice {
+    var radiusMultiplier: CGFloat
+    var fillColor: UIColor = UIColor.clear
+    var lineColor: UIColor = UIColor.black
+    var lineWidth: CGFloat = 1
+    
+    
+    init(radiusMultiplier: CGFloat, lineColor: UIColor = UIColor.black, lineWidth: CGFloat = 1, fillColor: UIColor = UIColor.clear) {
+        
+        self.radiusMultiplier = radiusMultiplier
+        self.lineColor = lineColor
+        self.lineWidth = lineWidth
+        self.fillColor = fillColor
+    }
+    
 }

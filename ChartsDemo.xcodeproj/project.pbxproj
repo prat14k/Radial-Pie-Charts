@@ -14,7 +14,6 @@
 		ABC41AD02100765C00092DD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC41ACE2100765C00092DD7 /* Main.storyboard */; };
 		ABC41AD22100765E00092DD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC41AD12100765E00092DD7 /* Assets.xcassets */; };
 		ABC41AD52100765E00092DD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC41AD32100765E00092DD7 /* LaunchScreen.storyboard */; };
-		ABC41B3D21008E9F00092DD7 /* ChartArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41B3C21008E9F00092DD7 /* ChartArea.swift */; };
 		ABC41B3F21008FAA00092DD7 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41B3E21008FAA00092DD7 /* Chart.swift */; };
 		ABC41B412100977E00092DD7 /* ChartSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41B402100977E00092DD7 /* ChartSlice.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +28,6 @@
 		ABC41AD12100765E00092DD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABC41AD42100765E00092DD7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABC41AD62100765E00092DD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ABC41B3C21008E9F00092DD7 /* ChartArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartArea.swift; sourceTree = "<group>"; };
 		ABC41B3E21008FAA00092DD7 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		ABC41B402100977E00092DD7 /* ChartSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSlice.swift; sourceTree = "<group>"; };
 		F02568EE419496AE9429CC9C /* Pods-ChartsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartsDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChartsDemo/Pods-ChartsDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 			children = (
 				ABC41B3E21008FAA00092DD7 /* Chart.swift */,
 				ABC41B402100977E00092DD7 /* ChartSlice.swift */,
-				ABC41B3C21008E9F00092DD7 /* ChartArea.swift */,
 				AB113C102101AF8300AA9CF6 /* ChartConcentricCircle.swift */,
 			);
 			path = Chart;
@@ -225,7 +222,6 @@
 				ABC41B3F21008FAA00092DD7 /* Chart.swift in Sources */,
 				ABC41ACD2100765C00092DD7 /* ViewController.swift in Sources */,
 				ABC41ACB2100765C00092DD7 /* AppDelegate.swift in Sources */,
-				ABC41B3D21008E9F00092DD7 /* ChartArea.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
