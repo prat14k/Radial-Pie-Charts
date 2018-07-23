@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4917075E03D0B0784CFEEC5A /* Pods_ChartsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4930AD3D12081AF73AB3B4C /* Pods_ChartsDemo.framework */; };
 		AB113C112101AF8300AA9CF6 /* ChartConcentricCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB113C102101AF8300AA9CF6 /* ChartConcentricCircle.swift */; };
 		ABC41ACB2100765C00092DD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41ACA2100765C00092DD7 /* AppDelegate.swift */; };
 		ABC41ACD2100765C00092DD7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41ACC2100765C00092DD7 /* ViewController.swift */; };
@@ -16,6 +15,9 @@
 		ABC41AD52100765E00092DD7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC41AD32100765E00092DD7 /* LaunchScreen.storyboard */; };
 		ABC41B3F21008FAA00092DD7 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41B3E21008FAA00092DD7 /* Chart.swift */; };
 		ABC41B412100977E00092DD7 /* ChartSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41B402100977E00092DD7 /* ChartSlice.swift */; };
+		ABDC0BF92105A6570012FF63 /* ChartDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0BF82105A6570012FF63 /* ChartDivider.swift */; };
+		ABDC0BFB2105A6D30012FF63 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0BFA2105A6D30012FF63 /* ImageAsset.swift */; };
+		ABDC0BFD2105BA770012FF63 /* ChartLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0BFC2105BA770012FF63 /* ChartLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,9 @@
 		ABC41AD62100765E00092DD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABC41B3E21008FAA00092DD7 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		ABC41B402100977E00092DD7 /* ChartSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSlice.swift; sourceTree = "<group>"; };
+		ABDC0BF82105A6570012FF63 /* ChartDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDivider.swift; sourceTree = "<group>"; };
+		ABDC0BFA2105A6D30012FF63 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
+		ABDC0BFC2105BA770012FF63 /* ChartLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLabel.swift; sourceTree = "<group>"; };
 		F02568EE419496AE9429CC9C /* Pods-ChartsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartsDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChartsDemo/Pods-ChartsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F4930AD3D12081AF73AB3B4C /* Pods_ChartsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -39,7 +44,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4917075E03D0B0784CFEEC5A /* Pods_ChartsDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +89,7 @@
 		ABC41AC92100765C00092DD7 /* ChartsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				ABDC0BFA2105A6D30012FF63 /* ImageAsset.swift */,
 				ABC41ACA2100765C00092DD7 /* AppDelegate.swift */,
 				ABC41ACC2100765C00092DD7 /* ViewController.swift */,
 				ABC41ACE2100765C00092DD7 /* Main.storyboard */,
@@ -101,6 +106,8 @@
 				ABC41B3E21008FAA00092DD7 /* Chart.swift */,
 				ABC41B402100977E00092DD7 /* ChartSlice.swift */,
 				AB113C102101AF8300AA9CF6 /* ChartConcentricCircle.swift */,
+				ABDC0BF82105A6570012FF63 /* ChartDivider.swift */,
+				ABDC0BFC2105BA770012FF63 /* ChartLabel.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -112,11 +119,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABC41AD92100765E00092DD7 /* Build configuration list for PBXNativeTarget "ChartsDemo" */;
 			buildPhases = (
-				66E23BA96D8D506DA458976E /* [CP] Check Pods Manifest.lock */,
 				ABC41AC32100765C00092DD7 /* Sources */,
 				ABC41AC42100765C00092DD7 /* Frameworks */,
 				ABC41AC52100765C00092DD7 /* Resources */,
-				50E9FB8DA19C97D22E49DF6E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,53 +178,17 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		50E9FB8DA19C97D22E49DF6E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ChartsDemo/Pods-ChartsDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChartsDemo/Pods-ChartsDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		66E23BA96D8D506DA458976E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ChartsDemo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		ABC41AC32100765C00092DD7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABDC0BFB2105A6D30012FF63 /* ImageAsset.swift in Sources */,
+				ABDC0BF92105A6570012FF63 /* ChartDivider.swift in Sources */,
 				AB113C112101AF8300AA9CF6 /* ChartConcentricCircle.swift in Sources */,
 				ABC41B412100977E00092DD7 /* ChartSlice.swift in Sources */,
 				ABC41B3F21008FAA00092DD7 /* Chart.swift in Sources */,
+				ABDC0BFD2105BA770012FF63 /* ChartLabel.swift in Sources */,
 				ABC41ACD2100765C00092DD7 /* ViewController.swift in Sources */,
 				ABC41ACB2100765C00092DD7 /* AppDelegate.swift in Sources */,
 			);
@@ -363,7 +332,6 @@
 		};
 		ABC41ADA2100765E00092DD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95657BA59BF442EFF1ACE2C0 /* Pods-ChartsDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -376,13 +344,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vinsol.ChartsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
 		ABC41ADB2100765E00092DD7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F02568EE419496AE9429CC9C /* Pods-ChartsDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -395,7 +362,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vinsol.ChartsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

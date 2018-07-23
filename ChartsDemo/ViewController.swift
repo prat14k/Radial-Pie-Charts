@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
 
     var slicesNum = 7
-    
+    var diff = -1
     @IBOutlet weak var pieView: Chart! {
         didSet {
             pieView.delegate = self
@@ -20,7 +20,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hgh() {
-        slicesNum = 5 + (arc4random_uniform(2) == 1 ? -1 : 1)
+        slicesNum = slicesNum + diff
+        if slicesNum > 8 || slicesNum == 0 { diff *= -1 }
         pieView.reloadData()
     }
     
@@ -34,8 +35,13 @@ class ViewController: UIViewController {
 
 extension ViewController: ChartDelegate {
     
+    func imageAsset(forDividerIndex: Int, chart: Chart) -> ImageAsset {
+        return .diamond
+    }
+    
     func circle(forChart chart: Chart, atIndex index: Int) -> ChartCircle {
-        var chartCircle = ChartCircle(title: "\(20 * (index + 1))", titleColor: UIColor.white, lineColor: UIColor.white)
+        let chartLabel = ChartLabel(text: "\(20 * (index + 1))", color: .white, font: UIFont.systemFont(ofSize: 14))
+        var chartCircle = ChartCircle(chartLabel: chartLabel , lineColor: UIColor.white)
         chartCircle.lineDash = LineDash(length: CGFloat(20 / (index + 2)), gap: CGFloat(20 / (index + 2)))
         return chartCircle
     }
@@ -51,7 +57,7 @@ extension ViewController: ChartDelegate {
 
     func sliceArea(fromChart chart: Chart, atIndex index: Int) -> ChartSlice {
         let v: CGFloat = 0.4 + (index % 2 == 0 ? 0.3 : 0.1) + (index == 4 ? 0.2 : 0)
-        var slice = ChartSlice(title: "Hydration \(index)",radiusMultiplier: v)
+        var slice = ChartSlice(radiusMultiplier: v, chartLabel: ChartLabel(text: "Hydration \(index)", color: .white, font: UIFont.systemFont(ofSize: 17)))
         slice.fillColor = UIColor.yellow.withAlphaComponent(0.3)
         slice.lineColor = UIColor.orange
         

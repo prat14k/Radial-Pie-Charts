@@ -17,21 +17,15 @@ struct LineDash {
 
 struct ChartCircle {
 
-
-    let title: String
-    let titleColor: UIColor
+    var chartLabel: ChartLabel
     var lineDash: LineDash?
     
     let lineWidth: CGFloat
     let lineColor: UIColor
     let fillColor: UIColor
     
-    
-    
-    
-    init(title: String, titleColor: UIColor = UIColor.black, lineWidth: CGFloat = 1, lineColor: UIColor = UIColor.black, fillColor: UIColor = UIColor.clear) {
-        self.title = title
-        self.titleColor = titleColor
+    init(chartLabel: ChartLabel, lineWidth: CGFloat = 1, lineColor: UIColor = UIColor.black, fillColor: UIColor = UIColor.clear) {
+        self.chartLabel = chartLabel
         self.lineWidth = lineWidth
         self.lineColor = lineColor
         self.fillColor = fillColor
