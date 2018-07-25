@@ -11,11 +11,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var selectedIndex = -1 {
+        didSet {
+            indedx?.text = "\(selectedIndex)"
+        }
+    }
     var slicesNum = 7
     var diff = -1
+    @IBOutlet weak var indedx: UILabel!
     @IBOutlet weak var pieView: Chart! {
         didSet {
             pieView.delegate = self
+            pieView.dataSource = self
         }
     }
     
@@ -33,7 +40,7 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: ChartDelegate {
+extension ViewController: ChartDataSource {
     
     func imageAsset(forDividerIndex: Int, chart: Chart) -> ImageAsset {
         return .diamond
@@ -50,11 +57,10 @@ extension ViewController: ChartDelegate {
         return 5
     }
     
-
     func numberOfSlices(forChart chart: Chart) -> Int {
         return slicesNum
     }
-
+    
     func sliceArea(fromChart chart: Chart, atIndex index: Int) -> ChartSlice {
         let v: CGFloat = 0.4 + (index % 2 == 0 ? 0.3 : 0.1) + (index == 4 ? 0.2 : 0)
         var slice = ChartSlice(radiusMultiplier: v, chartLabel: ChartLabel(text: "Hydration \(index)", color: .white, font: UIFont.systemFont(ofSize: 17)))
@@ -63,11 +69,29 @@ extension ViewController: ChartDelegate {
         
         return slice
     }
+    
+}
 
-
-    func maximumRadiusValue(forChart chart: Chart) -> CGFloat {
-        return pieView.bounds.width/2 - 50
+extension ViewController: ChartDelegate {
+    
+    // State not changing for the BezierPaths, probably need to make a shapeLayer from it rather than a context drawing instead.
+    func didTapSlice(atIndex index: Int) {
+        if selectedIndex == index {
+            pieView.deSelectArc(atIndex: index)
+            selectedIndex = -1
+        } else {
+            pieView.selectArc(atIndex: index)
+            selectedIndex = index
+        }
     }
+    
+//    func didRotateChart() {
+//        print("Graph Rotated")
+//    }
+//
+//    func maximumRadiusValue(forChart chart: Chart) -> CGFloat {
+//        return pieView.bounds.width/2 - 50
+//    }
 
 }
 
@@ -77,35 +101,3 @@ extension ViewController: ChartDelegate {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    let data1 = PieChartDataEntry(value: 0)
-//    let data2 = PieChartDataEntry(value: 0)
-
-
-//        pieView.chartDescription?.text = ""
-//
-//
-//        data1.label = "data 1"
-//        data2.label = "data 2"
-//        data1.value = 73
-//        data2.value = 27
-//
-//        let set = PieChartDataSet(values: [data1, data2], label: nil)
-//
-//        set.colors = [UIColor.red, UIColor.blue] as! [NSUIColor]
-//        let chartData = PieChartData(dataSet: set)
-//
-//        pieView.data = chartData

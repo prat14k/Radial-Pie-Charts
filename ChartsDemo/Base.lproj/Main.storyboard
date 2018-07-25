@@ -26,12 +26,20 @@
                                     <constraint firstAttribute="width" secondItem="Hdi-Jr-mJb" secondAttribute="height" multiplier="1:1" id="OI7-wq-jbP"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PU7-Wz-71y">
+                                <rect key="frame" x="1092" y="126" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.03328683035714286" green="0.012193080357142857" blue="0.8862745098" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="Hdi-Jr-mJb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="58c-p2-kkh"/>
+                            <constraint firstItem="PU7-Wz-71y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="6Cd-fy-wd8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Hdi-Jr-mJb" secondAttribute="bottom" constant="50" id="L48-Sy-H61"/>
                             <constraint firstItem="Hdi-Jr-mJb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="ohy-qv-vdV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PU7-Wz-71y" secondAttribute="trailing" constant="20" id="uec-8b-gk2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -43,6 +51,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="indedx" destination="PU7-Wz-71y" id="Dg6-Rq-bWH"/>
                         <outlet property="pieView" destination="Hdi-Jr-mJb" id="g5Q-Ja-1WG"/>
                     </connections>
                 </viewController>

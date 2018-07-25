@@ -9,15 +9,21 @@
 import UIKit
 
 
-protocol ChartDelegate: class {
-    func numberOfSlices(forChart chart: Chart) -> Int
-    func sliceArea(fromChart chart: Chart, atIndex index: Int) -> ChartSlice
-    func maximumRadiusValue(forChart chart: Chart) -> CGFloat
-    
-    func circle(forChart chart: Chart, atIndex index: Int) -> ChartCircle
+protocol ChartDataSource: class {
     func numberofConcentricCircles(forChart chart: Chart) -> Int
+    func numberOfSlices(forChart chart: Chart) -> Int
+    
+    func sliceArea(fromChart chart: Chart, atIndex index: Int) -> ChartSlice
+    func circle(forChart chart: Chart, atIndex index: Int) -> ChartCircle
     
     func imageAsset(forDividerIndex: Int, chart: Chart) -> ImageAsset
+}
+
+
+@objc protocol ChartDelegate: class {
+    @objc optional func maximumRadiusValue(forChart chart: Chart) -> CGFloat
+    @objc optional func didTapSlice(atIndex index: Int)
+    @objc optional func didRotateChart()
 }
 
 
@@ -25,6 +31,7 @@ class Chart: UIControl {
     
     static let imageSize: CGFloat = 35
     
+    weak var dataSource: ChartDataSource?
     weak var delegate: ChartDelegate?
     
     var dividerLineWidth: CGFloat = 1.5
@@ -39,10 +46,38 @@ class Chart: UIControl {
     
     private var isInitialSetupCompleted = false
     private var viewFrameCenter: CGPoint { return CGPoint(x: bounds.width / 2, y: bounds.height / 2) }
-//    var selectedLineWidth: CGFloat = 4
-//    var selectedIndex: Int?
-    
 
+    var selectedSliceLineWidth: CGFloat? = 4
+    var selectedSliceLineColor: UIColor? = UIColor.cyan
+    var selectedSliceFillColor: UIColor? = UIColor.yellow
+    
+    var isTapGestureEnabled: Bool = false
+    var isRotationGestureEnabled: Bool = false
+    
+    private(set) var selectedIndex: Int? {
+        didSet {
+            selectedIndex != nil ? delegate?.didTapSlice?(atIndex: selectedIndex!) : nil
+        }
+    }
+    
+    private var arcSlices = [UIBezierPath]()
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addGestures()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        addGestures()
+    }
+    
+}
+
+
+extension Chart {
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -51,7 +86,6 @@ class Chart: UIControl {
         reloadData()
         isInitialSetupCompleted = !isInitialSetupCompleted
     }
-    
     
     
     override func draw(_ rect: CGRect) {
@@ -81,12 +115,13 @@ extension Chart {
     }
     
     private func setupGraph() {
-        
-        guard let circlesCount = delegate?.numberofConcentricCircles(forChart: self),
-              let slicesCount = delegate?.numberOfSlices(forChart: self),
-              let maximumRadius = delegate?.maximumRadiusValue(forChart: self)
+        arcSlices.removeAll()
+        guard let circlesCount = dataSource?.numberofConcentricCircles(forChart: self),
+              let slicesCount = dataSource?.numberOfSlices(forChart: self)
         else { return }
-            
+        
+        let maximumRadius = delegate?.maximumRadiusValue?(forChart: self) ?? ((bounds.height / 2) - 50)
+        
         if slicesCount < 0 || maximumRadius < 0 || circlesCount < 0  {
             breakExecution(message: "Negative values cannot be sent from the delegate methods")
         }
@@ -94,22 +129,21 @@ extension Chart {
         self.circlesCount = circlesCount
         self.slicesCount = slicesCount
         self.maximumRadius = maximumRadius
-        
     }
     
     private func fetchChartSlices() {
         slices.removeAll()
-        guard let delegate = delegate, slicesCount > 0  else { return }
+        guard let dataSource = dataSource, slicesCount > 0  else { return }
         for i in 0..<slicesCount {
-            slices.append(delegate.sliceArea(fromChart: self, atIndex: i))
+            slices.append(dataSource.sliceArea(fromChart: self, atIndex: i))
         }
     }
     
     private func fetchChartCircles() {
         chartCircles.removeAll()
-        guard let delegate = delegate, circlesCount > 0  else { return }
+        guard let dataSource = dataSource, circlesCount > 0  else { return }
         for i in 0..<circlesCount {
-            chartCircles.append(delegate.circle(forChart: self, atIndex: i))
+            chartCircles.append(dataSource.circle(forChart: self, atIndex: i))
         }
     }
     
@@ -161,7 +195,7 @@ extension Chart {
             dividerLine.move(to: viewFrameCenter)
             dividerLine.addLine(to: nextPoint)
             
-            guard let dividerImageAsset = delegate?.imageAsset(forDividerIndex: index, chart: self)   else { continue }
+            guard let dividerImageAsset = dataSource?.imageAsset(forDividerIndex: index, chart: self)   else { continue }
             addDividerImage(asset: dividerImageAsset, atExtendedAngle: angle)
         }
         
@@ -270,6 +304,8 @@ extension Chart {
         arc.stroke()
         chartSlice.fillColor.setFill()
         arc.fill()
+        
+        arcSlices.append(arc)
     }
     
     
@@ -292,6 +328,84 @@ extension Chart {
     
     
 }
+
+
+
+extension Chart {
+    
+    private func addTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(gesture:)))
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.numberOfTouchesRequired = 1
+        addGestureRecognizer(tapGesture)
+    }
+    
+    private func addRotationGesture() {
+        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(gesture:)))
+        addGestureRecognizer(rotationGesture)
+    }
+    
+    private func addGestures() {
+        addTapGesture()
+        addRotationGesture()
+    }
+    
+}
+
+
+extension Chart {
+    
+    func selectArc(atIndex index: Int) {
+        guard index < slices.count, index >= 0  else { return }
+        let arc = arcSlices[index]
+        let slice = slices[index]
+        
+        arc.lineWidth = selectedSliceLineWidth ?? slice.lineWidth
+        (selectedSliceLineColor ?? slice.lineColor).setStroke()
+        arc.stroke()
+        (selectedSliceFillColor ?? slice.fillColor).setFill()
+        arc.fill()
+    }
+    
+    func deSelectArc(atIndex index: Int) {
+        guard index < slices.count, index >= 0  else { return }
+        let arc = arcSlices[index]
+        let slice = slices[index]
+        
+        arc.lineWidth = slice.lineWidth
+        slice.lineColor.setStroke()
+        arc.stroke()
+        slice.fillColor.setFill()
+        arc.fill()
+    }
+
+}
+
+
+extension Chart {
+    
+    @objc private func handleTap(gesture: UITapGestureRecognizer) {
+        guard isTapGestureEnabled  else { return }
+        let tapPoint = gesture.location(in: self)
+        var index = 0
+        
+        for arcSlice in arcSlices {
+            guard !arcSlice.contains(tapPoint)
+            else { selectedIndex = index; break; }
+            index += 1
+        }
+    }
+    
+    @objc private func handleRotation(gesture: UIRotationGestureRecognizer) {
+        guard isRotationGestureEnabled  else { return }
+        transform = transform.rotated(by: gesture.rotation)
+        gesture.rotation = 0
+        delegate?.didRotateChart?()
+    }
+    
+}
+
+
 
 
 extension Chart {
@@ -373,12 +487,4 @@ extension Chart {
         context.restoreGState()
     }
 
-}
-
-
-
-extension CGFloat {
-    func toRadians() -> CGFloat {
-        return self * CGFloat.pi / 180.0
-    }
 }

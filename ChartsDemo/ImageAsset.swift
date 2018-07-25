@@ -10,9 +10,7 @@ import UIKit
 
 
 enum ImageAsset: String {
-    
     case diamond
-    
 }
 
 extension UIImage {
