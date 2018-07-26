@@ -11,12 +11,12 @@ import UIKit
 
 struct ChartSlice {
     var radiusMultiplier: CGFloat
-    var fillColor: UIColor = UIColor.clear
-    var lineColor: UIColor = UIColor.black
-    var lineWidth: CGFloat = 1
-    var chartLabel: ChartLabel
+    var fillColor: UIColor
+    var lineColor: UIColor
+    var lineWidth: CGFloat
+    let chartLabel: ChartLabel
     
-    init(radiusMultiplier: CGFloat, lineColor: UIColor = UIColor.black, lineWidth: CGFloat = 1, fillColor: UIColor = UIColor.clear, chartLabel: ChartLabel) {
+    init(radiusMultiplier: CGFloat, lineColor: UIColor = UIColor.black, lineWidth: CGFloat = 0.8, fillColor: UIColor = UIColor.clear, chartLabel: ChartLabel) {
         
         self.chartLabel = chartLabel
         self.radiusMultiplier = radiusMultiplier

@@ -45,14 +45,15 @@ class Chart: UIControl {
     private var maximumRadius: CGFloat = 0
     
     private var isInitialSetupCompleted = false
-    private var viewFrameCenter: CGPoint { return CGPoint(x: bounds.width / 2, y: bounds.height / 2) }
-
+    
+    private var arcSlices = [CAShapeLayer]()
+    
     var selectedSliceLineWidth: CGFloat? = 4
     var selectedSliceLineColor: UIColor? = UIColor.cyan
     var selectedSliceFillColor: UIColor? = UIColor.yellow
     
-    var isTapGestureEnabled: Bool = false
-    var isRotationGestureEnabled: Bool = false
+    var isTapGestureEnabled: Bool = true
+    var isRotationGestureEnabled: Bool = true
     
     private(set) var selectedIndex: Int? {
         didSet {
@@ -60,7 +61,7 @@ class Chart: UIControl {
         }
     }
     
-    private var arcSlices = [UIBezierPath]()
+    private var viewFrameCenter: CGPoint { return CGPoint(x: bounds.width / 2, y: bounds.height / 2) }
     
     
     
@@ -104,6 +105,7 @@ extension Chart {
     
     func reloadData() {
         subviews.forEach { $0.removeFromSuperview() }
+        layer.sublayers?.forEach { $0.removeFromSuperlayer() }
         setupGraph()
         
         fetchChartCircles()
@@ -288,7 +290,7 @@ extension Chart {
         
         let arc = UIBezierPath()
         
-        arc.lineWidth = chartSlice.lineWidth
+//        arc.lineWidth = chartSlice.lineWidth
         arc.move(to: viewFrameCenter)
         
         var nextPoint = CGPoint.zero
@@ -300,12 +302,19 @@ extension Chart {
         arc.addArc(withCenter: viewFrameCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         arc.addLine(to: viewFrameCenter)
         
-        chartSlice.lineColor.setStroke()
-        arc.stroke()
-        chartSlice.fillColor.setFill()
-        arc.fill()
+//        chartSlice.lineColor.setStroke()
+//        arc.stroke()
+//        chartSlice.fillColor.setFill()
+//        arc.fill()
         
-        arcSlices.append(arc)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.fillColor = chartSlice.fillColor.cgColor
+        shapeLayer.strokeColor = chartSlice.lineColor.cgColor
+        shapeLayer.lineWidth = chartSlice.lineWidth
+        shapeLayer.path = arc.cgPath
+        
+        layer.insertSublayer(shapeLayer, at: 0)
+        arcSlices.append(shapeLayer)
     }
     
     
@@ -355,16 +364,29 @@ extension Chart {
 
 extension Chart {
     
+    func deSelectAllSlices() {
+        guard slices.count > 0 else { return }
+        for i in 0..<slices.count {
+            deSelectArc(atIndex: i)
+        }
+    }
+    
     func selectArc(atIndex index: Int) {
         guard index < slices.count, index >= 0  else { return }
+        deSelectAllSlices()
+        
         let arc = arcSlices[index]
         let slice = slices[index]
-        
+
         arc.lineWidth = selectedSliceLineWidth ?? slice.lineWidth
-        (selectedSliceLineColor ?? slice.lineColor).setStroke()
-        arc.stroke()
-        (selectedSliceFillColor ?? slice.fillColor).setFill()
-        arc.fill()
+        arc.strokeColor = (selectedSliceLineColor ?? slice.lineColor).cgColor
+        arc.fillColor = (selectedSliceFillColor ?? slice.fillColor).cgColor
+        
+//        arc.lineWidth = selectedSliceLineWidth ?? slice.lineWidth
+//        (selectedSliceLineColor ?? slice.lineColor).setStroke()
+//        arc.stroke()
+//        (selectedSliceFillColor ?? slice.fillColor).setFill()
+//        arc.fill()
     }
     
     func deSelectArc(atIndex index: Int) {
@@ -373,10 +395,14 @@ extension Chart {
         let slice = slices[index]
         
         arc.lineWidth = slice.lineWidth
-        slice.lineColor.setStroke()
-        arc.stroke()
-        slice.fillColor.setFill()
-        arc.fill()
+        arc.strokeColor = slice.lineColor.cgColor
+        arc.fillColor = slice.fillColor.cgColor
+        
+//        arc.lineWidth = slice.lineWidth
+//        slice.lineColor.setStroke()
+//        arc.stroke()
+//        slice.fillColor.setFill()
+//        arc.fill()
     }
 
 }
@@ -390,7 +416,7 @@ extension Chart {
         var index = 0
         
         for arcSlice in arcSlices {
-            guard !arcSlice.contains(tapPoint)
+            guard !(arcSlice.path?.contains(tapPoint) ?? false)
             else { selectedIndex = index; break; }
             index += 1
         }
@@ -487,4 +513,11 @@ extension Chart {
         context.restoreGState()
     }
 
+}
+
+
+extension CGFloat {
+    func toRadians() -> CGFloat {
+        return self * CGFloat.pi / 180.0
+    }
 }
