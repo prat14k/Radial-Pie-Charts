@@ -34,7 +34,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        pieView.startAnimatingArcs(duration: 1)
     }
 
 }
@@ -47,8 +54,8 @@ extension ViewController: ChartDataSource {
     }
     
     func circle(forChart chart: Chart, atIndex index: Int) -> ChartCircle {
-        let chartLabel = ChartLabel(text: "\(20 * (index + 1))", color: .white, font: UIFont.systemFont(ofSize: 14))
-        var chartCircle = ChartCircle(chartLabel: chartLabel , lineColor: UIColor.white)
+        let graphLabel = GraphLabel(text: "\(20 * (index + 1))", color: .white, font: UIFont.systemFont(ofSize: 14))
+        var chartCircle = ChartCircle(graphLabel: graphLabel , lineColor: UIColor.white)
         chartCircle.lineDash = LineDash(length: CGFloat(20 / (index + 2)), gap: CGFloat(20 / (index + 2)))
         return chartCircle
     }
@@ -63,7 +70,7 @@ extension ViewController: ChartDataSource {
     
     func sliceArea(fromChart chart: Chart, atIndex index: Int) -> ChartSlice {
         let v: CGFloat = 0.4 + (index % 2 == 0 ? 0.3 : 0.1) + (index == 4 ? 0.2 : 0)
-        var slice = ChartSlice(radiusMultiplier: v, chartLabel: ChartLabel(text: "Hydration \(index)", color: .white, font: UIFont.systemFont(ofSize: 17)))
+        var slice = ChartSlice(radiusMultiplier: v, avgPointRadiusMultiplier: v, avgImageAsset: .diamond, graphLabel: GraphLabel(text: "Hydration \(index)", color: .white, font: UIFont.systemFont(ofSize: 17)))
         slice.fillColor = UIColor.yellow.withAlphaComponent(0.3)
         slice.lineColor = UIColor.orange
         
@@ -74,7 +81,6 @@ extension ViewController: ChartDataSource {
 
 extension ViewController: ChartDelegate {
     
-    // State not changing for the BezierPaths, probably need to make a shapeLayer from it rather than a context drawing instead.
     func didTapSlice(atIndex index: Int) {
         if selectedIndex == index {
             pieView.deSelectArc(atIndex: index)
@@ -85,14 +91,6 @@ extension ViewController: ChartDelegate {
         }
     }
     
-//    func didRotateChart() {
-//        print("Graph Rotated")
-//    }
-//
-//    func maximumRadiusValue(forChart chart: Chart) -> CGFloat {
-//        return pieView.bounds.width/2 - 50
-//    }
-
 }
 
 

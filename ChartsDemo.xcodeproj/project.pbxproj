@@ -17,7 +17,9 @@
 		ABC41B412100977E00092DD7 /* ChartSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC41B402100977E00092DD7 /* ChartSlice.swift */; };
 		ABDC0BF92105A6570012FF63 /* ChartDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0BF82105A6570012FF63 /* ChartDivider.swift */; };
 		ABDC0BFB2105A6D30012FF63 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0BFA2105A6D30012FF63 /* ImageAsset.swift */; };
-		ABDC0BFD2105BA770012FF63 /* ChartLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDC0BFC2105BA770012FF63 /* ChartLabel.swift */; };
+		ABE9200E2159251C00CF7D32 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE9200D2159251C00CF7D32 /* Extensions.swift */; };
+		ABE920102159254D00CF7D32 /* Arc.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE9200F2159254D00CF7D32 /* Arc.swift */; };
+		ABE920122159259900CF7D32 /* GraphLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE920112159259900CF7D32 /* GraphLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +36,9 @@
 		ABC41B402100977E00092DD7 /* ChartSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartSlice.swift; sourceTree = "<group>"; };
 		ABDC0BF82105A6570012FF63 /* ChartDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDivider.swift; sourceTree = "<group>"; };
 		ABDC0BFA2105A6D30012FF63 /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
-		ABDC0BFC2105BA770012FF63 /* ChartLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLabel.swift; sourceTree = "<group>"; };
+		ABE9200D2159251C00CF7D32 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		ABE9200F2159254D00CF7D32 /* Arc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arc.swift; sourceTree = "<group>"; };
+		ABE920112159259900CF7D32 /* GraphLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphLabel.swift; sourceTree = "<group>"; };
 		F02568EE419496AE9429CC9C /* Pods-ChartsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChartsDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChartsDemo/Pods-ChartsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F4930AD3D12081AF73AB3B4C /* Pods_ChartsDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChartsDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -103,11 +107,13 @@
 		ABC41B3B21008E5F00092DD7 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				ABE9200D2159251C00CF7D32 /* Extensions.swift */,
+				ABE920112159259900CF7D32 /* GraphLabel.swift */,
+				ABE9200F2159254D00CF7D32 /* Arc.swift */,
 				ABC41B3E21008FAA00092DD7 /* Chart.swift */,
 				ABC41B402100977E00092DD7 /* ChartSlice.swift */,
 				AB113C102101AF8300AA9CF6 /* ChartConcentricCircle.swift */,
 				ABDC0BF82105A6570012FF63 /* ChartDivider.swift */,
-				ABDC0BFC2105BA770012FF63 /* ChartLabel.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -184,11 +190,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABDC0BFB2105A6D30012FF63 /* ImageAsset.swift in Sources */,
+				ABE9200E2159251C00CF7D32 /* Extensions.swift in Sources */,
+				ABE920102159254D00CF7D32 /* Arc.swift in Sources */,
 				ABDC0BF92105A6570012FF63 /* ChartDivider.swift in Sources */,
 				AB113C112101AF8300AA9CF6 /* ChartConcentricCircle.swift in Sources */,
 				ABC41B412100977E00092DD7 /* ChartSlice.swift in Sources */,
 				ABC41B3F21008FAA00092DD7 /* Chart.swift in Sources */,
-				ABDC0BFD2105BA770012FF63 /* ChartLabel.swift in Sources */,
+				ABE920122159259900CF7D32 /* GraphLabel.swift in Sources */,
 				ABC41ACD2100765C00092DD7 /* ViewController.swift in Sources */,
 				ABC41ACB2100765C00092DD7 /* AppDelegate.swift in Sources */,
 			);
